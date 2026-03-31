@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Суверенитет государства</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --ink:#0e0b06;
+  --parch:#f2ead8;
+  --parch2:#e8ddc4;
+  --gold:#c49a2a;
+  --gold2:#e8c04a;
+  --rust:#7a2e14;
+  --sepia:#5c3d1e;
+  --muted:#8a7255;
+  --overlay-bg:rgba(8,6,2,0.92);
+}
+
+body{
+  background:#0e0b06;
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:32px 20px;
+  font-family:'Cormorant Garamond',Georgia,serif;
+}
+
+/* ══════════ POSTER ══════════ */
+.poster{
+  width:794px;
+  background:var(--parch);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(196,154,42,0.2), 0 40px 120px rgba(0,0,0,0.85);
+}
+
+/* Paper texture */
+.poster::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 20% 10%, rgba(196,154,42,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(122,46,20,0.06) 0%, transparent 45%);
+}
+
+/* Gold border */
+.border-frame{
+  position:absolute;inset:12px;
+  border:1px solid var(--gold);
+  pointer-events:none;z-index:10;
+}
+.border-frame::before{
+  content:'';position:absolute;inset:5px;
+  border:0.4px solid rgba(196,154,42,0.4);
+}
+
+/* Corner SVG */
+.co{position:absolute;width:44px;height:44px;z-index:11;pointer-events:none;}
+.co-tl{top:4px;left:4px;}
+.co-tr{top:4px;right:4px;transform:scaleX(-1);}
+.co-bl{bottom:4px;left:4px;transform:scaleY(-1);}
+.co-br{bottom:4px;right:4px;transform:scale(-1);}
+
+/* ══════════ HEADER ══════════ */
+.header{
+  position:relative;z-index:2;
+  padding:44px 60px 28px;
+  text-align:center;
+}
+
+.cinzel{font-family:'Cinzel',serif;}
+
+.eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:9.5px;letter-spacing:6px;
+  color:var(--gold);margin-bottom:16px;
+  text-transform:uppercase;
+}
+
+.title-wrap{margin-bottom:8px;}
+.title-main{
+  font-family:'Cormorant Garamond',serif;
+  font-size:68px;font-weight:300;
+  line-height:0.95;color:var(--ink);
+  letter-spacing:-1px;
+}
+.title-main strong{font-weight:700;}
+.title-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:26px;font-weight:300;
+  color:var(--rust);line-height:1;margin-top:4px;
+}
+
+.gold-rule{
+  display:flex;align-items:center;gap:14px;
+  margin:18px 0;
+}
+.gold-rule::before,.gold-rule::after{
+  content:'';flex:1;height:0.5px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.gold-rule .rune{
+  font-family:'Cinzel',serif;font-size:13px;
+  color:var(--gold);letter-spacing:2px;
+}
+
+.latin{
+  font-style:italic;font-size:13.5px;
+  color:var(--muted);letter-spacing:0.5px;
+}
+
+/* ══════════ HERO IMAGE STRIP ══════════ */
+.hero-strip{
+  position:relative;z-index:2;
+  width:100%;height:220px;
+  overflow:hidden;
+  margin-bottom:0;
+}
+.hero-strip img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 30%;
+  filter:sepia(0.35) contrast(1.05) brightness(0.88);
+}
+.hero-strip::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    rgba(242,234,216,0.15) 0%,
+    rgba(8,6,2,0) 30%,
+    rgba(8,6,2,0) 70%,
+    rgba(242,234,216,0.6) 100%);
+}
+.hero-caption{
+  position:absolute;bottom:14px;left:0;right:0;
+  text-align:center;z-index:2;
+  font-style:italic;font-size:11px;
+  color:rgba(242,234,216,0.7);letter-spacing:2px;
+}
+
+/* ══════════ THREE PILLARS ══════════ */
+.pillars{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  position:relative;z-index:2;
+}
+.pillar{
+  padding:20px 22px;
+  border-right:0.5px solid rgba(196,154,42,0.3);
+  cursor:pointer;
+  transition:background .25s;
+  position:relative;overflow:hidden;
+}
+.pillar:last-child{border-right:none;}
+.pillar:hover{background:rgba(196,154,42,0.07);}
+.pillar::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2.5px;
+  transition:opacity .25s;
+}
+.pa::before{background:linear-gradient(90deg,#2a4a6b,#4a7aab);}
+.pb::before{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.pc::before{background:linear-gradient(90deg,var(--rust),#b05030);}
+
+.pillar-icon{
+  width:36px;height:36px;margin-bottom:10px;
+  opacity:0.7;
+}
+.p-num{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;
+  color:var(--gold);margin-bottom:5px;
+}
+.p-title{
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:22px;color:var(--ink);margin-bottom:6px;line-height:1;
+}
+.p-desc{font-size:13px;line-height:1.6;color:var(--sepia);}
+.p-arrow{
+  position:absolute;bottom:14px;right:16px;
+  font-size:16px;color:var(--gold);opacity:0;
+  transition:opacity .2s;
+}
+.pillar:hover .p-arrow{opacity:1;}
+
+/* ══════════ SECTION LABEL ══════════ */
+.sec-label{
+  position:relative;z-index:2;
+  display:flex;align-items:center;gap:14px;
+  padding:0 60px;margin:26px 0 20px;
+}
+.sec-label .l{flex:1;height:0.5px;background:rgba(196,154,42,0.35);}
+.sec-label .t{
+  font-family:'Cinzel',serif;font-size:9px;
+  letter-spacing:5px;color:var(--gold);
+  text-transform:uppercase;
+}
+
+/* ══════════ PHILOSOPHER CARDS ══════════ */
+.phils{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;
+  padding:0 40px;
+  position:relative;z-index:2;
+  margin-bottom:26px;
+}
+
+.phil-card{
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:0 8px 16px;
+  cursor:pointer;
+  position:relative;
+  transition:transform .22s;
+}
+.phil-card:hover{transform:translateY(-4px);}
+.phil-card:hover .phil-name{color:var(--rust);}
+
+/* Portrait circle */
+.portrait-wrap{
+  width:104px;height:104px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid rgba(196,154,42,0.5);
+  margin-bottom:10px;
+  position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,0.18);
+  transition:border-color .22s, box-shadow .22s;
+  flex-shrink:0;
+}
+.phil-card:hover .portrait-wrap{
+  border-color:var(--gold);
+  box-shadow:0 6px 28px rgba(196,154,42,0.25);
+}
+.portrait-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+  filter:sepia(0.2) contrast(1.05) brightness(0.95);
+  transition:filter .22s;
+}
+.phil-card:hover .portrait-wrap img{
+  filter:sepia(0.05) contrast(1.08) brightness(1.0);
+}
+
+/* Fallback monogram */
+.portrait-mono{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--parch2);
+  font-family:'Cormorant Garamond',serif;
+  font-size:34px;font-weight:300;
+  color:var(--muted);
+}
+
+.phil-year{
+  font-family:'Cinzel',serif;font-size:9px;
+  letter-spacing:2px;color:var(--gold);
+  margin-bottom:4px;text-align:center;
+}
+.phil-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:600;
+  color:var(--ink);text-align:center;
+  margin-bottom:4px;line-height:1.1;
+  transition:color .22s;
+}
+.phil-tag{
+  font-size:11.5px;font-style:italic;
+  color:var(--muted);text-align:center;
+  line-height:1.35;
+}
+.phil-dot{
+  width:20px;height:1px;
+  background:var(--gold);
+  margin:6px auto;opacity:0.5;
+}
+
+/* ══════════ BOTTOM: QUOTE + CHALLENGES ══════════ */
+.bottom-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:0.5px solid rgba(196,154,42,0.3);
+  position:relative;z-index:2;
+}
+
+.quote-panel{
+  padding:22px 28px 22px 60px;
+  border-right:0.5px solid rgba(196,154,42,0.25);
+}
+.q-mark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:72px;line-height:0.5;
+  color:var(--gold);opacity:0.18;
+  margin-bottom:6px;
+}
+.q-text{
+  font-style:italic;font-size:15px;
+  line-height:1.75;color:var(--ink);
+  margin-bottom:10px;
+}
+.q-author{
+  font-family:'Cinzel',serif;font-size:8.5px;
+  letter-spacing:2.5px;color:var(--gold);
+}
+
+.challenges-panel{
+  padding:22px 40px 22px 28px;
+}
+.ch-title{
+  font-family:'Cinzel',serif;font-size:8.5px;
+  letter-spacing:4px;color:var(--gold);
+  margin-bottom:14px;
+}
+.ch-item{
+  display:flex;align-items:baseline;gap:8px;
+  margin-bottom:9px;
+}
+.ch-dash{color:var(--gold);font-size:14px;line-height:1;flex-shrink:0;}
+.ch-text{font-size:13.5px;font-style:italic;color:var(--sepia);line-height:1.35;}
+
+/* ══════════ FOOTER ══════════ */
+.footer{
+  background:var(--ink);
+  padding:10px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:2;
+}
+.f-text{
+  font-family:'Cinzel',serif;font-size:8px;
+  letter-spacing:3px;color:rgba(196,154,42,0.6);
+}
+.f-dots{display:flex;gap:5px;}
+.f-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:0.4;}
+
+/* ═══════════════════════════
+   MODAL
+═══════════════════════════ */
+.overlay{
+  position:fixed;inset:0;
+  background:var(--overlay-bg);
+  z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+  backdrop-filter:blur(6px);
+}
+.overlay.open{opacity:1;pointer-events:all;}
+
+.modal{
+  width:720px;max-height:90vh;
+  background:var(--parch);
+  overflow-y:auto;
+  position:relative;
+  box-shadow:0 0 0 1px rgba(196,154,42,0.3), 0 40px 80px rgba(0,0,0,0.7);
+  transform:scale(0.95) translateY(16px);
+  transition:transform .32s cubic-bezier(.22,1,.36,1);
+  scrollbar-width:thin;
+  scrollbar-color:rgba(196,154,42,0.3) transparent;
+}
+.overlay.open .modal{transform:scale(1) translateY(0);}
+
+.modal-close{
+  position:absolute;top:18px;right:22px;
+  background:none;border:none;cursor:pointer;
+  font-size:20px;color:var(--muted);
+  opacity:0.6;transition:opacity .2s;z-index:5;
+  font-family:'Cormorant Garamond',serif;
+}
+.modal-close:hover{opacity:1;}
+
+/* Philosopher modal layout */
+.m-hero{
+  width:100%;height:260px;
+  position:relative;overflow:hidden;
+}
+.m-hero img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 15%;
+  filter:sepia(0.25) contrast(1.08) brightness(0.82);
+}
+.m-hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,
+    rgba(14,11,6,0) 40%,
+    rgba(14,11,6,0.85) 100%);
+}
+.m-hero-text{
+  position:absolute;bottom:24px;left:36px;right:36px;z-index:2;
+}
+.m-era{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;
+  color:rgba(232,192,74,0.85);margin-bottom:6px;
+}
+.m-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:46px;font-weight:300;
+  color:#f2ead8;line-height:1;
+}
+.m-dates{
+  font-size:13px;color:rgba(232,192,74,0.7);
+  letter-spacing:2px;margin-top:4px;
+}
+
+.m-body{padding:28px 36px 32px;}
+
+.m-works{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.m-work{
+  border:0.5px solid rgba(196,154,42,0.45);
+  padding:4px 11px;
+  font-style:italic;font-size:12.5px;color:var(--sepia);
+}
+
+.m-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:20px;
+}
+.m-cell{
+  background:rgba(14,11,6,0.04);
+  border:0.5px solid rgba(196,154,42,0.25);
+  padding:14px;
+}
+.m-cell-title{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;font-size:15px;
+  color:var(--ink);margin-bottom:5px;
+}
+.m-cell-text{font-size:13px;line-height:1.6;color:var(--sepia);}
+
+.m-quote{
+  border-left:2.5px solid var(--gold);
+  padding:12px 18px;
+  background:rgba(196,154,42,0.05);
+  font-style:italic;font-size:14.5px;
+  line-height:1.7;color:var(--sepia);
+  margin-bottom:18px;
+}
+.m-quote cite{
+  display:block;margin-top:7px;
+  font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gold);font-style:normal;
+}
+
+.m-main-text{
+  font-size:15px;line-height:1.8;
+  color:var(--ink);margin-bottom:16px;
+}
+
+/* Pillar modal — no hero image */
+.m-pillar-header{
+  padding:32px 36px 0;
+  border-bottom:0.5px solid rgba(196,154,42,0.3);
+  margin-bottom:24px;
+  padding-bottom:20px;
+}
+.m-accent{height:3px;margin-bottom:18px;}
+.m-a1{background:linear-gradient(90deg,#2a4a6b,transparent);}
+.m-a2{background:linear-gradient(90deg,var(--gold),transparent);}
+.m-a3{background:linear-gradient(90deg,var(--rust),transparent);}
+
+/* nav */
+.m-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 36px 20px;
+  border-top:0.5px solid rgba(196,154,42,0.25);
+}
+.m-nav-btn{
+  background:none;border:0.5px solid rgba(196,154,42,0.4);
+  color:var(--sepia);font-family:'Cormorant Garamond',serif;
+  font-size:13px;padding:6px 18px;cursor:pointer;
+  transition:background .2s,color .2s;letter-spacing:0.5px;
+}
+.m-nav-btn:hover{background:var(--gold);color:var(--parch);}
+.m-nav-btn:disabled{opacity:0.2;cursor:default;}
+.m-nav-btn:disabled:hover{background:none;color:var(--sepia);}
+.m-counter{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--gold);}
+
+/* ══════════ MOBILE RESPONSIVE ══════════ */
+@media (max-width: 600px) {
+
+  body {
+    padding: 0;
+    background: var(--parch);
+  }
+
+  .poster {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 32px 24px 20px;
+  }
+
+  .title-main {
+    font-size: 44px;
+    letter-spacing: -0.5px;
+  }
+
+  .title-sub {
+    font-size: 17px;
+    margin-top: 6px;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 4px;
+  }
+
+  .latin {
+    font-size: 12px;
+  }
+
+  /* ── Hero strip ── */
+  .hero-strip {
+    height: 160px;
+  }
+
+  .hero-caption {
+    font-size: 9.5px;
+    letter-spacing: 1px;
+    padding: 0 12px;
+  }
+
+  /* ── Three pillars: stack vertically ── */
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .pillar {
+    border-right: none;
+    border-bottom: 0.5px solid rgba(196,154,42,0.3);
+    padding: 16px 24px;
+  }
+
+  .pillar:last-child {
+    border-bottom: none;
+  }
+
+  .pa::before, .pb::before, .pc::before {
+    height: 2px;
+  }
+
+  .p-title {
+    font-size: 20px;
+  }
+
+  .p-desc {
+    font-size: 13px;
+  }
+
+  /* ── Section label ── */
+  .sec-label {
+    padding: 0 24px;
+    margin: 20px 0 16px;
+  }
+
+  /* ── Philosopher cards: 2 columns + last centered ── */
+  .phils {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+
+  /* Last card (Hegel) spans full width and centers */
+  .phil-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 160px;
+    margin: 0 auto;
+  }
+
+  .portrait-wrap {
+    width: 84px;
+    height: 84px;
+  }
+
+  .phil-name {
+    font-size: 14px;
+  }
+
+  .phil-tag {
+    font-size: 10.5px;
+  }
+
+  .phil-year {
+    font-size: 8px;
+  }
+
+  /* ── Bottom row: stack vertically ── */
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-panel {
+    padding: 20px 24px;
+    border-right: none;
+    border-bottom: 0.5px solid rgba(196,154,42,0.25);
+  }
+
+  .q-text {
+    font-size: 15px;
+  }
+
+  .challenges-panel {
+    padding: 20px 24px;
+  }
+
+  .ch-text {
+    font-size: 13px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 10px 24px;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .f-text {
+    font-size: 7.5px;
+    text-align: center;
+  }
+
+  /* ── Modal ── */
+  .overlay {
+    align-items: flex-end;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 0;
+    transform: translateY(40px);
+  }
+
+  .overlay.open .modal {
+    transform: translateY(0);
+  }
+
+  .m-hero {
+    height: 200px;
+  }
+
+  .m-name {
+    font-size: 32px;
+  }
+
+  .m-hero-text {
+    left: 20px;
+    right: 20px;
+    bottom: 16px;
+  }
+
+  .m-body {
+    padding: 20px 20px 24px;
+  }
+
+  .m-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .m-quote {
+    font-size: 13.5px;
+  }
+
+  .m-main-text {
+    font-size: 14px;
+  }
+
+  .m-nav {
+    padding: 14px 20px 16px;
+  }
+
+  .m-nav-btn {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+
+  /* Corner decorations — scale down */
+  .co {
+    width: 30px;
+    height: 30px;
+  }
+
+  .border-frame {
+    inset: 8px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 860px) {
+  body { padding: 16px 12px; }
+  .poster { width: 100%; }
+  .header { padding: 36px 40px 22px; }
+  .title-main { font-size: 54px; }
+  .phils { grid-template-columns: repeat(3, 1fr); padding: 0 24px; }
+  .phil-card:nth-child(4),
+  .phil-card:nth-child(5) { /* center last row of 2 */
+    margin: 0 auto;
+  }
+  .portrait-wrap { width: 90px; height: 90px; }
+  .modal { width: 94vw; }
+}
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <div class="border-frame"></div>
+
+  <!-- corners -->
+  <div class="co co-tl"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42V2h40" stroke="#c49a2a" stroke-width="1.5"/><circle cx="2" cy="2" r="2.2" fill="#c49a2a"/><path d="M8 36V8h28" stroke="#c49a2a" stroke-width="0.4" opacity="0.4"/></svg></div>
+  <div class="co co-tr"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42V2h40" stroke="#c49a2a" stroke-width="1.5"/><circle cx="2" cy="2" r="2.2" fill="#c49a2a"/><path d="M8 36V8h28" stroke="#c49a2a" stroke-width="0.4" opacity="0.4"/></svg></div>
+  <div class="co co-bl"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42V2h40" stroke="#c49a2a" stroke-width="1.5"/><circle cx="2" cy="2" r="2.2" fill="#c49a2a"/><path d="M8 36V8h28" stroke="#c49a2a" stroke-width="0.4" opacity="0.4"/></svg></div>
+  <div class="co co-br"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42V2h40" stroke="#c49a2a" stroke-width="1.5"/><circle cx="2" cy="2" r="2.2" fill="#c49a2a"/><path d="M8 36V8h28" stroke="#c49a2a" stroke-width="0.4" opacity="0.4"/></svg></div>
+
+  <!-- ── HEADER ── -->
+  <div class="header">
+    <div class="eyebrow">Политическая философия</div>
+    <div class="title-wrap">
+      <div class="title-main"><strong>Суверенитет</strong></div>
+      <div class="title-sub">Свобода, власть и ответственность государства</div>
+    </div>
+    <div class="gold-rule"><span class="rune">✦</span></div>
+    <div class="latin"><em>Auctoritas, non veritas facit legem</em> &nbsp;·&nbsp; Томас Гоббс</div>
+  </div>
+
+  <!-- ── HERO IMAGE ── -->
+  <div class="hero-strip">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/1200px-Camponotus_flavomarginatus_ant.jpg"
+         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Westphalian_Peace_%281648%29_from_Gotha_Almanach.jpg/1280px-Westphalian_Peace_%281648%29_from_Gotha_Almanach.jpg'"
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Westphalian_Peace_%281648%29_from_Gotha_Almanach.jpg/1280px-Westphalian_Peace_%281648%29_from_Gotha_Almanach.jpg"
+         alt="Вестфальский мир 1648">
+    <div class="hero-caption">Вестфальский мирный конгресс, 1648 — рождение системы суверенных государств</div>
+  </div>
+
+  <!-- ── THREE PILLARS ── -->
+  <div class="pillars">
+    <div class="pillar pa" onclick="openModal('freedom')">
+      <div class="p-num">I · СВОБОДА</div>
+      <div class="p-title">Libertas</div>
+      <div class="p-desc">Негативная и позитивная — два измерения государственной независимости</div>
+      <div class="p-arrow">↗</div>
+    </div>
+    <div class="pillar pb" onclick="openModal('sovereignty')">
+      <div class="p-num">II · СУВЕРЕНИТЕТ</div>
+      <div class="p-title">Imperium</div>
+      <div class="p-desc">Верховная власть внутри и независимость от внешнего принуждения</div>
+      <div class="p-arrow">↗</div>
+    </div>
+    <div class="pillar pc" onclick="openModal('responsibility')">
+      <div class="p-num">III · ОТВЕТСТВЕННОСТЬ</div>
+      <div class="p-title">Auctoritas</div>
+      <div class="p-desc">Власть как доверие народа — обязательство, а не привилегия</div>
+      <div class="p-arrow">↗</div>
+    </div>
+  </div>
+
+  <!-- ── PHILOSOPHERS ── -->
+  <div class="sec-label">
+    <div class="l"></div>
+    <div class="t">Великие мыслители</div>
+    <div class="l"></div>
+  </div>
+
+  <div class="phils">
+
+    <div class="phil-card" onclick="openModal('hobbes')">
+      <div class="portrait-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Thomas_Hobbes_%28portrait%29.jpg"
+             alt="Томас Гоббс"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Thomas_Hobbes_%28portrait%29.jpg/440px-Thomas_Hobbes_%28portrait%29.jpg'">
+      </div>
+      <div class="phil-year">1588–1679</div>
+      <div class="phil-name">Томас Гоббс</div>
+      <div class="phil-dot"></div>
+      <div class="phil-tag">Левиафан, абсолютный суверенитет</div>
+    </div>
+
+    <div class="phil-card" onclick="openModal('locke')">
+      <div class="portrait-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/JohnLocke.png"
+             alt="Джон Локк"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/JohnLocke.png/440px-JohnLocke.png'">
+      </div>
+      <div class="phil-year">1632–1704</div>
+      <div class="phil-name">Джон Локк</div>
+      <div class="phil-dot"></div>
+      <div class="phil-tag">Власть как доверие народа</div>
+    </div>
+
+    <div class="phil-card" onclick="openModal('rousseau')">
+      <div class="portrait-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg"
+             alt="Жан-Жак Руссо"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg/440px-Jean-Jacques_Rousseau_%28painted_portrait%29.jpg'">
+      </div>
+      <div class="phil-year">1712–1778</div>
+      <div class="phil-name">Жан-Жак Руссо</div>
+      <div class="phil-dot"></div>
+      <div class="phil-tag">Общая воля, народный суверен</div>
+    </div>
+
+    <div class="phil-card" onclick="openModal('kant')">
+      <div class="portrait-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg"
+             alt="Иммануил Кант"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Immanuel_Kant_%28painted_portrait%29.jpg/440px-Immanuel_Kant_%28painted_portrait%29.jpg'">
+      </div>
+      <div class="phil-year">1724–1804</div>
+      <div class="phil-name">Иммануил Кант</div>
+      <div class="phil-dot"></div>
+      <div class="phil-tag">Вечный мир, право народов</div>
+    </div>
+
+    <div class="phil-card" onclick="openModal('hegel')">
+      <div class="portrait-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Georg_Wilhelm_Friedrich_Hegel00.jpg"
+             alt="Гегель"
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Georg_Wilhelm_Friedrich_Hegel00.jpg/440px-Georg_Wilhelm_Friedrich_Hegel00.jpg'">
+      </div>
+      <div class="phil-year">1770–1831</div>
+      <div class="phil-name">Г.В.Ф. Гегель</div>
+      <div class="phil-dot"></div>
+      <div class="phil-tag">Государство как нравственный дух</div>
+    </div>
+
+  </div>
+
+  <!-- ── BOTTOM ROW ── -->
+  <div class="bottom-row">
+    <div class="quote-panel">
+      <div class="q-mark">"</div>
+      <div class="q-text">Человек рождён свободным, но повсюду он в оковах</div>
+      <div class="q-author">Руссо · Об общественном договоре, 1762</div>
+    </div>
+    <div class="challenges-panel">
+      <div class="ch-title">Вызовы XXI века</div>
+      <div class="ch-item"><div class="ch-dash">—</div><div class="ch-text">Цифровой суверенитет</div></div>
+      <div class="ch-item"><div class="ch-dash">—</div><div class="ch-text">Глобализация и международное право</div></div>
+      <div class="ch-item"><div class="ch-dash">—</div><div class="ch-text">Климатический кризис</div></div>
+      <div class="ch-item"><div class="ch-dash">—</div><div class="ch-text">Искусственный интеллект и власть</div></div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <div class="f-text">Политическая философия</div>
+    <div class="f-dots"><div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div></div>
+    <div class="f-text">Суверенитет · Свобода · Ответственность</div>
+  </div>
+</div>
+
+<!-- ══════════ MODAL ══════════ -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-body"></div>
+    <div class="m-nav">
+      <button class="m-nav-btn" id="btn-prev" onclick="nav(-1)">← Назад</button>
+      <span class="m-counter" id="m-counter"></span>
+      <button class="m-nav-btn" id="btn-next" onclick="nav(1)">Вперёд →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = {
+
+  freedom:{
+    type:'pillar', accent:'m-a1',
+    title:'Свобода', sub:'Libertas',
+    body:`
+      <div class="m-grid">
+        <div class="m-cell">
+          <div class="m-cell-title">Негативная свобода</div>
+          <div class="m-cell-text">Свобода <em>от</em> вмешательства. Государство свободно, пока другие не навязывают ему волю. Основа Вестфальского принципа невмешательства.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Позитивная свобода</div>
+          <div class="m-cell-text">Свобода <em>для</em> самоопределения. Формальный суверенитет при экономической зависимости — фикция. Реальная независимость требует условий.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Исайя Берлин, 1958</div>
+          <div class="m-cell-text">«Два понятия свободы» — фундаментальный текст, разграничивший оба типа. Применимо и к государствам, и к личности.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Цифровой суверенитет</div>
+          <div class="m-cell-text">Государство, зависящее от чужих платформ и серверов, — свободно ли оно? Новейшее измерение независимости в XXI веке.</div>
+        </div>
+      </div>
+      <div class="m-quote">
+        Свобода есть право делать всё, что дозволено законами.
+        <cite>Монтескьё · О духе законов, 1748</cite>
+      </div>`
+  },
+
+  sovereignty:{
+    type:'pillar', accent:'m-a2',
+    title:'Суверенитет', sub:'Imperium',
+    body:`
+      <div class="m-grid">
+        <div class="m-cell">
+          <div class="m-cell-title">Внутренний суверенитет</div>
+          <div class="m-cell-text">Верховенство государственной власти над всеми институтами внутри территории. Никакая сила не вправе ей законно противостоять.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Вестфальская система, 1648</div>
+          <div class="m-cell-text">Мирный конгресс закрепил равенство суверенов и принцип невмешательства — фундамент международного порядка на 370 лет.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Народный суверенитет</div>
+          <div class="m-cell-text">Источник власти — народ, а не монарх. Государство лишь уполномоченный. Правитель управляет во имя народа, не вместо него.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">R2P, 2005</div>
+          <div class="m-cell-text">Ответственность по защите: суверенитет — не щит для тиранов, а обязанность защищать граждан. Кризис — открывает дверь вмешательству.</div>
+        </div>
+      </div>
+      <div class="m-quote">
+        Суверенитет — это абсолютная и постоянная власть республики.
+        <cite>Жан Боден · Шесть книг о государстве, 1576</cite>
+      </div>`
+  },
+
+  responsibility:{
+    type:'pillar', accent:'m-a3',
+    title:'Ответственность', sub:'Auctoritas',
+    body:`
+      <div class="m-grid">
+        <div class="m-cell">
+          <div class="m-cell-title">Перед гражданами</div>
+          <div class="m-cell-text">Общественный договор: власть получена от народа и для народа. Нарушение — утрата легитимности и право на сопротивление.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Перед будущими поколениями</div>
+          <div class="m-cell-text">Государство — временный попечитель территории и природных ресурсов, которые принадлежат не только живущим сегодня.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Перед международным правом</div>
+          <div class="m-cell-text">Нюрнбергский прецедент, 1945: «выполнял приказ» не освобождает от ответственности. Существуют нормы выше государственного закона.</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-title">Перед моральным законом</div>
+          <div class="m-cell-text">Кантовская традиция: категорический императив обязывает и государства. Человек — не средство. Никогда.</div>
+        </div>
+      </div>
+      <div class="m-quote">
+        Правительства существуют для блага людей, а не люди для блага правительств.
+        <cite>Генри Дэвид Торо · Гражданское неповиновение, 1849</cite>
+      </div>`
+  },
+
+  hobbes:{
+    type:'phil',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Thomas_Hobbes_%28portrait%29.jpg/1200px-Thomas_Hobbes_%28portrait%29.jpg',
+    era:'Англия · XVII век',
+    name:'Томас Гоббс',
+    dates:'1588 — 1679',
+    works:['Левиафан (1651)','О гражданине (1642)'],
+    quote:'Война всех против всех — таково естественное состояние человечества без государства. Жизнь одинока, бедна, отвратительна, жестока и коротка.',
+    qsrc:'Левиафан, 1651',
+    text:'Гоббс писал в эпоху Гражданской войны в Англии. Его вопрос: зачем подчиняться государству? Ответ — без него жизнь невыносима. Люди заключают договор: отдают права суверену в обмен на безопасность. Левиафан — всесильное государство, стоящее над договором.',
+    cells:[
+      {t:'Левиафан',d:'Образ государства как «искусственного человека», созданного людьми для собственной защиты от хаоса естественного состояния.'},
+      {t:'Война всех против всех',d:'Без государства — bellum omnium contra omnes. Не история, а мысленный эксперимент: что будет без общей власти.'},
+      {t:'Абсолютный суверен',d:'Суверен не связан договором — он в нём не участвовал. Восстание нелегитимно даже против тирана: любая власть лучше анархии.'},
+      {t:'Auctoritas, non veritas',d:'«Авторитет, а не истина создаёт закон». Право — то, что суверен приказывает. Без власти истина бессильна.'}
+    ]
+  },
+
+  locke:{
+    type:'phil',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/JohnLocke.png/1200px-JohnLocke.png',
+    era:'Англия · XVII–XVIII вв.',
+    name:'Джон Локк',
+    dates:'1632 — 1704',
+    works:['Два трактата о правлении (1689)','Письмо о веротерпимости (1689)'],
+    quote:'Везде, где заканчивается закон, начинается тирания.',
+    qsrc:'Два трактата о правлении, 1689',
+    text:'Локк отвечает Гоббсу и переворачивает его выводы. У Локка власть — доверие (trust), а не передача прав. Народ остаётся суверенным. Правительство — агент. Нарушил договор — потерял легитимность. Народ вправе его сменить. Это основа либеральной демократии.',
+    cells:[
+      {t:'Власть как доверие',d:'Правительство — агент, не собственник. Злоупотребление нарушает условия доверия и лишает власти её легитимности.'},
+      {t:'Право на революцию',d:'Народ вправе свергнуть тирана. Это не разрушение общества — это восстановление договора. Вдохновение для двух революций.'},
+      {t:'Естественные права',d:'Жизнь, свобода, собственность — не подарок государства, а предшествующие ему права. Государство не создаёт их, а обеспечивает.'},
+      {t:'Разделение властей',d:'Законодательная власть верховна, но ограничена: она не может нарушать естественные права граждан.'}
+    ]
+  },
+
+  rousseau:{
+    type:'phil',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg/1200px-Jean-Jacques_Rousseau_%28painted_portrait%29.jpg',
+    era:'Женева · Франция · XVIII в.',
+    name:'Жан-Жак Руссо',
+    dates:'1712 — 1778',
+    works:['Об общественном договоре (1762)','Рассуждение о неравенстве (1755)'],
+    quote:'Человек рождён свободным, но повсюду он в оковах. Иной мнит себя господином других, хотя сам является рабом в большей мере, чем они.',
+    qsrc:'Об общественном договоре, 1762',
+    text:'Руссо совершил переворот: суверен — не монарх, не парламент, а сам народ. Правитель лишь исполнитель общей воли. Народ, избравший парламент, свободен только в день выборов, после — снова в рабстве. Радикальная критика представительной демократии.',
+    cells:[
+      {t:'Общая воля',d:'Volonté générale — воля народа как целого, направленная на общее благо. Не большинство голосов и не сумма частных интересов.'},
+      {t:'Народный суверенитет',d:'Суверен — только народ. Передать суверенитет представителям невозможно: это противоречит самой идее. Можно лишь поручить исполнение.'},
+      {t:'Человек добр по природе',d:'Цивилизация и собственность испортили человека. Неравенство — не природный, а социальный факт, созданный людьми.'},
+      {t:'Суверенитет неделим',d:'Нельзя разделить суверенитет — это значит его уничтожить. Гегемония частей разрушает единство народной воли.'}
+    ]
+  },
+
+  kant:{
+    type:'phil',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Immanuel_Kant_%28painted_portrait%29.jpg/1200px-Immanuel_Kant_%28painted_portrait%29.jpg',
+    era:'Пруссия · XVIII–XIX вв.',
+    name:'Иммануил Кант',
+    dates:'1724 — 1804',
+    works:['К вечному миру (1795)','Метафизика нравов (1797)'],
+    quote:'Право народов должно быть основано на федерализме свободных государств. Только так возможно устойчивое состояние мира.',
+    qsrc:'К вечному миру, 1795',
+    text:'Кант поставил вопрос: каким должен быть международный порядок? Его ответ — федерация свободных республик. Республики не воюют: граждане сами несут издержки войны. Суверенитет ограничен моральным законом. Нюрнбергский принцип — прямое следствие кантовской этики.',
+    cells:[
+      {t:'Вечный мир',d:'Не утопия, а регулятивный идеал. Федерация свободных республиканских государств — единственный путь к устойчивому миру.'},
+      {t:'Республиканский мир',d:'Демократии не воюют друг с другом: граждане несут издержки войны и не склонны её начинать. Политическое следствие морали.'},
+      {t:'Всемирное гражданство',d:'Каждый человек имеет право посещать любую территорию и не быть уничтоженным. Зачаток права на убежище.'},
+      {t:'Моральный закон',d:'Категорический императив обязывает и государства. Человек всегда цель, никогда средство — даже если законы позволяют иное.'}
+    ]
+  },
+
+  hegel:{
+    type:'phil',
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Georg_Wilhelm_Friedrich_Hegel00.jpg/1200px-Georg_Wilhelm_Friedrich_Hegel00.jpg',
+    era:'Германия · XIX век',
+    name:'Г.В.Ф. Гегель',
+    dates:'1770 — 1831',
+    works:['Философия права (1820)','Феноменология духа (1807)'],
+    quote:'Государство есть действительность нравственной идеи — нравственный дух как явная, самой себе ясная субстанциальная воля.',
+    qsrc:'Философия права, 1820',
+    text:'Гегель — главный оппонент Канта. Государство для него не инструмент, а высшее воплощение свободы и нравственной идеи. Там, где Локк видит угрозу, Гегель видит освобождение: в государстве частная воля человека впервые соединяется со всеобщей.',
+    cells:[
+      {t:'Государство как идея',d:'Государство — не договор и не инструмент. Это высшая форма человеческой свободы, в которой особенное и всеобщее примиряются.'},
+      {t:'Диалектика свободы',d:'Подлинная свобода — не произвол, а принятие всеобщего закона. Гражданин свободен именно подчиняясь нравственному государству.'},
+      {t:'Всемирная история',d:'История — развёртывание мирового духа. Народы сменяют друг друга как носители духа эпохи. История судит их делами.'},
+      {t:'Гражданское общество',d:'Сфера между семьёй и государством — рынок, корпорации, суды. Нуждается в государственной опеке, но не тождественна ему.'}
+    ]
+  }
+};
+
+const order = ['freedom','sovereignty','responsibility','hobbes','locke','rousseau','kant','hegel'];
+let cur = null;
+
+function buildModal(id){
+  const d = data[id];
+  if(d.type==='pillar'){
+    return `
+      <div class="m-pillar-header">
+        <div class="m-accent ${d.accent}"></div>
+        <div class="m-era">Философская концепция</div>
+        <div class="m-name" style="font-size:40px;color:var(--ink)">${d.title}</div>
+        <div class="m-dates" style="color:var(--muted);font-style:italic;font-size:16px">${d.sub}</div>
+      </div>
+      <div class="m-body">${d.body}</div>`;
+  }
+  return `
+    <div class="m-hero">
+      <img src="${d.img}" alt="${d.name}"
+           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Georg_Wilhelm_Friedrich_Hegel00.jpg/440px-Georg_Wilhelm_Friedrich_Hegel00.jpg'">
+      <div class="m-hero-text">
+        <div class="m-era">${d.era}</div>
+        <div class="m-name">${d.name}</div>
+        <div class="m-dates">${d.dates}</div>
+      </div>
+    </div>
+    <div class="m-body">
+      <div class="m-works">${d.works.map(w=>`<div class="m-work">${w}</div>`).join('')}</div>
+      <div class="m-quote">${d.quote}<cite>${d.qsrc}</cite></div>
+      <p class="m-main-text">${d.text}</p>
+      <div class="m-grid">${d.cells.map(c=>`
+        <div class="m-cell">
+          <div class="m-cell-title">${c.t}</div>
+          <div class="m-cell-text">${c.d}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function openModal(id){
+  cur = id;
+  render();
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function render(){
+  document.getElementById('modal-body').innerHTML = buildModal(cur);
+  document.getElementById('modal').scrollTop = 0;
+  const idx = order.indexOf(cur);
+  document.getElementById('m-counter').textContent = `${idx+1} / ${order.length}`;
+  document.getElementById('btn-prev').disabled = idx===0;
+  document.getElementById('btn-next').disabled = idx===order.length-1;
+}
+function nav(d){
+  const idx = order.indexOf(cur)+d;
+  if(idx>=0&&idx<order.length){cur=order[idx];render();}
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
+// Force load portrait images via proxy if direct Wikipedia load fails
+const PORTRAITS = {
+  hobbes: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Thomas_Hobbes_%28portrait%29.jpg',
+  locke:  'https://upload.wikimedia.org/wikipedia/commons/d/d1/JohnLocke.png',
+  rousseau:'https://upload.wikimedia.org/wikipedia/commons/b/b4/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg',
+  kant:   'https://upload.wikimedia.org/wikipedia/commons/4/43/Immanuel_Kant_%28painted_portrait%29.jpg',
+  hegel:  'https://upload.wikimedia.org/wikipedia/commons/a/ac/Georg_Wilhelm_Friedrich_Hegel00.jpg'
+};
+
+function proxyUrl(url){
+  return 'https://wsrv.nl/?url=' + encodeURIComponent(url) + '&w=220&h=220&fit=cover&a=top';
+}
+
+document.querySelectorAll('.portrait-wrap img').forEach(img => {
+  img.addEventListener('error', function(){
+    const proxy = proxyUrl(this.src.split('?')[0]);
+    if(this.src !== proxy) this.src = proxy;
+  }, {once: true});
+});
+
+document.addEventListener('keydown',e=>{
+  const o=document.getElementById('overlay');
+  if(!o.classList.contains('open'))return;
+  if(e.key==='Escape')closeModal();
+  if(e.key==='ArrowRight')nav(1);
+  if(e.key==='ArrowLeft')nav(-1);
+});
+</script>
+</body>
+</html>
